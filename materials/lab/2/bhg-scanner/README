@@ -1,1 +1,14 @@
-You might need to do a "go mod init bhg-scanner" or "go mod tidy"
+My implementation of the BHG Scanner goes through and scans all ports from 1-1024, and outputs the status of all ports (open or closed).
+
+
+Modifications(Based on to-do's):
+  Added Usage Description
+  Changed net.Dial to net.DialTimeout
+  Added a closedports variable to store number of ports that are closed
+  Enhanced the output for easier consumption by adding a comma after %d
+  Modified the output to return both the number of open ports and closed ports
+  
+Modifications based on part 5:
+  Created a totalPorts int parameter and set it equal to 1024 within the PortScanner function
+  Went to everywhere that called the PortScanner function and updated the parameter
+  Changed the PortScanner call in main.go to have 1024 as the parameter since that was the only way it would work.
