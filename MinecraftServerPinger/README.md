@@ -48,6 +48,7 @@ However, the query setting must be enabled in order for the program to be able t
 		https://pkg.go.dev/time (Documentation of time package, used for implementing timeouts for the program)
 		https://gobyexample.com/timeouts (Specifically for implementing timeouts)
 		https://www.w3schools.com/go/go_input.php (For accepting a user input rather than just pre-assigning a variable).
-		https://help.minecraft.net/hc/en-us/articles/360058525452-How-to-Setup-a-Minecraft-Java-Edition-Server (Documentation for setting up a minecraft 		 server)
+		https://help.minecraft.net/hc/en-us/articles/360058525452-How-to-Setup-a-Minecraft-Java-Edition-Server (Documentation for setting up a minecraft
+		server)
 		
-		
+		This program does not serve as an extension/modification of someone else's work, all code was written by me using research/existing code 		 	documentation via the references above. There are methods of achieving the same thing using the TCP protocol by using pre-existing dependencies/API's 		      but the goal of this project was not to rely off of existing dependencies/API's (accept for minecraft's prebuilt querying setting built in to the  		 server software). This program was built for educational purposes only and while there is no inherently malicious functionality within my program, it 			can be used in tandem with other scripts to cause damage, so please use discretion when utilizing this program and always ensure you have permission 		     from the server owner/administator (if not being tested on personal server/machine).
