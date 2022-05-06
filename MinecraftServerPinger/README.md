@@ -35,7 +35,7 @@ However, the query setting must be enabled in order for the program to be able t
 		
 		- NOTE THAT THIS ONLY WORKS ON SERVERS RUNNING ON THE JAVA EDITION OF MINECRAFT, BEDROCK EDITION SERVERS UTILIZE DIFFERENT PROTOCOLS.
 		
-	Breakdown of time spent working on project (since I was making changes/running tests entirely on my local machine instead of pushing all of my changes to 	  GitHub)
+	Breakdown of time spent working on project (since I was making changes/running tests entirely on my local machine instead of pushing all of my changes to GitHub)
 		- Planning: 1-2 Hours (Coming up with idea/pseudocoding)
 		- Researching: 3-4 hours (Initial research/reading on querying documentation was about an hour, the remaining research time was spent looking at 		 specific documentation needed for code functionality such as the "time package" for implementing timeouts)
 		- Getting baseline code written: ~13 hours (Not counting the pauses for reading code documentation)
