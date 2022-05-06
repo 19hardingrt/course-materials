@@ -37,9 +37,9 @@ However, the query setting must be enabled in order for the program to be able t
 		
 	Breakdown of time spent working on project (since I was making changes/running tests entirely on my local machine instead of pushing all of my changes to GitHub)
 		- Planning: 1-2 Hours (Coming up with idea/pseudocoding)
-		- Researching: 3-4 hours (Initial research/reading on querying documentation was about an hour, the remaining research time was spent looking at 		 specific documentation needed for code functionality such as the "time package" for implementing timeouts)
+		- Researching: 3-4 hours (Initial research/reading on querying documentation was about an hour, the remaining research time was spent looking at specific documentation needed for code functionality such as the "time package" for implementing timeouts)
 		- Getting baseline code written: ~13 hours (Not counting the pauses for reading code documentation)
-		- Testing/Debugging: ~15 hours (This took a long time as initially my code was not outputting any server information when the server was running. Only 		       to find out this was because I did not have querying enabled on my local server *facepalm*
+		- Testing/Debugging: ~15 hours (This took a long time as initially my code was not outputting any server information when the server was running. Only 	to find out this was because I did not have querying enabled on my local server *facepalm*
 		- Total: 34-35 hours (Not counting my stupidity during the debug/testing process it took about 20 hours)
 		
 		
@@ -51,4 +51,4 @@ However, the query setting must be enabled in order for the program to be able t
 		https://help.minecraft.net/hc/en-us/articles/360058525452-How-to-Setup-a-Minecraft-Java-Edition-Server (Documentation for setting up a minecraft
 		server)
 		
-		This program does not serve as an extension/modification of someone else's work, all code was written by me using research/existing code 		 	documentation via the references above. There are methods of achieving the same thing using the TCP protocol by using pre-existing dependencies/API's 		      but the goal of this project was not to rely off of existing dependencies/API's (accept for minecraft's prebuilt querying setting built in to the  		 server software). This program was built for educational purposes only and while there is no inherently malicious functionality within my program, it 			can be used in tandem with other scripts to cause damage, so please use discretion when utilizing this program and always ensure you have permission 		     from the server owner/administator (if not being tested on personal server/machine).
+		This program does not serve as an extension/modification of someone else's work, all code was written by me using research/existing code 	documentation via the references above. There are methods of achieving the same thing using the TCP protocol by using pre-existing dependencies/API's 		      but the goal of this project was not to rely off of existing dependencies/API's (accept for minecraft's prebuilt querying setting built in to the  		 server software). This program was built for educational purposes only and while there is no inherently malicious functionality within my program, it 			can be used in tandem with other scripts to cause damage, so please use discretion when utilizing this program and always ensure you have permission 		     from the server owner/administator (if not being tested on personal server/machine).
