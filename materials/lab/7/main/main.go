@@ -21,7 +21,7 @@ func main() {
 
 	//TODO Grab the file to use from the command line instead; look at previous lab (e.g., #3 ) for examples of grabbing info from command line
 	if len(os.Args) != 2 {
-		fmt.Printf("Error: Incorrect number of arguments. Usage: ./main [filepath]")
+		fmt.Printf("Error: Incorrect number of arguments. Example: ./main [filepath]")
 		os.Exit(1);
 	}
 	var file = os.Args[1]
