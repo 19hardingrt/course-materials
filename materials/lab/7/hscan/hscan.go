@@ -33,6 +33,8 @@ func GuessSingle(sourceHash string, filename string) string {
 
 		// TODO - From the length of the hash you should know which one of these to check ...
 		// add a check and logicial structure
+		
+		//Not the best way to implement this but since we know both hash types, it'll suffice
 		if len(sourceHash) == 32 {
 			hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
 			if hash == sourceHash {
