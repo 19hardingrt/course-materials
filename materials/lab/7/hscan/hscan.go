@@ -8,14 +8,17 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 )
 
 //==========================================================================\\
 
 var shalookup map[string]string
 var md5lookup map[string]string
+var mutexMD5 sync.Mutex
+var mutexSHA sync.Mutex
 
-func GuessSingle(sourceHash string, filename string) string{
+func GuessSingle(sourceHash string, filename string) string {
 
 	f, err := os.Open(filename)
 	if err != nil {
@@ -30,19 +33,19 @@ func GuessSingle(sourceHash string, filename string) string{
 
 		// TODO - From the length of the hash you should know which one of these to check ...
 		// add a check and logicial structure
-		if len(sourceHash) == 32{
+		if len(sourceHash) == 32 {
 			hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
 			if hash == sourceHash {
 				return password
 			}
 		}
-		if len(sourceHash) > 32{
+		if len(sourceHash) > 32 {
 			hash := fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
 			if hash == sourceHash {
 				return password
 			}
 		}
-		
+
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -51,40 +54,27 @@ func GuessSingle(sourceHash string, filename string) string{
 	return ""
 }
 
-func GenHashMaps(filename string, useGoRoutine bool) {
+func GenHashMaps(filename string) {
 	//TODO
 	//itterate through a file (look in the guessSingle function above)
 	//rather than check for equality add each hash:passwd entry to a map SHA and MD5 where the key = hash and the value = password
 	//TODO at the very least use go subroutines to generate the sha and md5 hashes at the same time
 	//OPTIONAL -- Can you use workers to make this even faster
-	shalookup = make(map[string]string)
-	md5lookup = make(map[string]string)
+	var routines sync.WaitGroup
 
 	f, err := os.Open(filename)
-	if err != nil {
+	g, err1 := os.Open(filename)
+	if err != nil || err1 != nil {
 		log.Fatalln(err)
 	}
 	defer f.Close()
+	defer g.Close()
 
-	scanner := bufio.NewScanner(f)
-	var md5Hash string
-	var shaHash string
-	for scanner.Scan() {
-		password := scanner.Text()
-		if(useGoRoutine) {
-			c1 := make(chan string)
-			c2 := make(chan string)
-			go mapMd5(password, c1)
-			go mapSha(password, c2)
-			md5Hash = <- c1
-			shaHash = <- c2
-		} else {
-			md5Hash = fmt.Sprintf("%x", md5.Sum([]byte(password)))
-			shaHash = fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
-		}
-		md5lookup[md5Hash] = password
-		shalookup[shaHash] = password
-	}
+	routines.Add(1)
+	go LogSHAHash(f, &routines)
+	routines.Add(1)
+	go LogMD5Hash(g, &routines)
+	routines.Wait()
 
 	//TODO create a test in hscan_test.go so that you can time the performance of your implementation
 	//Test and record the time it takes to scan to generate these Maps
@@ -92,14 +82,34 @@ func GenHashMaps(filename string, useGoRoutine bool) {
 	// 2. Compute the time per password (hint the number of passwords for each file is listed on the site...)
 }
 
-func mapMd5(password string, c chan string) {
-	hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
-	c <- hash
+func LogMD5Hash(file *os.File, routines *sync.WaitGroup) {
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		password := scanner.Text()
+		mutexMD5.Lock()
+		hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
+		md5lookup[hash] = password
+		mutexMD5.Unlock()
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatalln(err)
+	}
+	routines.Done()
 }
 
-func mapSha(password string, c chan string) {
-	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
-	c <- hash
+func LogSHAHash(file *os.File, routines *sync.WaitGroup) {
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		password := scanner.Text()
+		mutexSHA.Lock()
+		hash := fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
+		shalookup[hash] = password
+		mutexSHA.Unlock()
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatalln(err)
+	}
+	routines.Done()
 }
 
 func GetSHA(hash string) (string, error) {
