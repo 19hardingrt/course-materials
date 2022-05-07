@@ -19,7 +19,7 @@ func TestGenHashMaps(t *testing.T) {
 	GenHashMaps("../main/gmail-alleged.txt")
 }
 
-func DrBPassword(t *testing.T) {
+func DrBPasswordTest(t *testing.T) {
 	GenHashMaps("../main/gmail-alleged.txt")
 	gotMD5, _ := GetMD5("90f2c9c53f66540e67349e0ab83d8cd0")
 	wantMD5 := "p@ssword"
